@@ -1,5 +1,7 @@
+from ast import literal_eval
 import pandas as pd
 from data_connectors import get_reliefweb_leads
+from src.analysis.documents_based_analysis import _perform_documents_based_analysis
 import argparse
 import dotenv
 import os
@@ -31,13 +33,46 @@ def _classify_entries(
     entries: pd.DataFrame,
     entries_column: str = "Extraction Text",
     classification_column: str = "First Level Classification",
+    prediction_ratio: float = 1.05,
 ) -> pd.DataFrame:
     from humanitarian_extract_classificator import humbert_classification
 
     entries[classification_column] = humbert_classification(
-        entries[entries_column].tolist(), prediction_ratio=0.9
+        entries[entries_column].tolist(), prediction_ratio=prediction_ratio
     )
     return entries
+
+
+def _preprocess_classification_results(classification_results: str) -> list[str]:
+    number_tags = {
+        "Pillars 2D->At Risk->Number Of People At Risk": "Pillars 2D->At Risk->Risk And Vulnerabilities",
+        "Pillars 2D->Impact->Number Of People Affected": "Pillars 2D->Impact->Impact On People",
+        "Pillars 2D->Humanitarian Conditions->Number Of People In Need": "Pillars 2D->Humanitarian Conditions->Living Standards",
+    }
+    final_classification = []
+    classification_results_list = literal_eval(classification_results)
+    for tag in classification_results_list:
+        if tag in number_tags:
+            final_classification.append(number_tags[tag])
+        else:
+            final_classification.append(
+                tag.replace(
+                    "Pillars 2D->Priority Interventions", "Pillars 2D->Priority Needs"
+                )
+            )
+    return sorted(list(set(final_classification)))
+
+
+def _import_classification_dataset(
+    classification_dataset_path: str,
+    classification_column: str = "First Level Classification",
+) -> pd.DataFrame:
+    df = pd.read_csv(classification_dataset_path)
+    df[classification_column] = df[classification_column].apply(
+        _preprocess_classification_results
+    )
+    df = df.sort_values(by="Extraction Text", key=lambda col: col.fillna("").str.len())
+    return df
 
 
 if __name__ == "__main__":
@@ -50,6 +85,12 @@ if __name__ == "__main__":
     parser.add_argument(
         "--classification_column", type=str, default="First Level Classification"
     )
+    parser.add_argument("--prediction_ratio", type=float, default=1.05)
+    parser.add_argument("--countries_to_analyze", type=str, nargs="+", default=["Iran", "Lebanon"])
+    parser.add_argument("--n_kept_entries", type=int, default=15)
+    parser.add_argument("--answers_save_path", type=str, default="answers.json")
+    parser.add_argument("--risk_list_save_path", type=str, default="risk_list.json")
+    parser.add_argument("--key_indicator_numbers_save_path", type=str, default="key_indicator_numbers.json")
     args = parser.parse_args()
 
     sample = args.sample_bool.lower() == "true"
@@ -79,8 +120,31 @@ if __name__ == "__main__":
 
     if args.classification_column not in entries_df.columns:
         entries_df = _classify_entries(
-            entries_df, classification_column=args.classification_column
+            entries_df, classification_column=args.classification_column, prediction_ratio=args.prediction_ratio
         )
         entries_df.to_csv(classification_dataset_path, index=False)
 
-    
+    if "Entry ID" not in entries_df.columns:
+        entries_df["Entry ID"] = entries_df.index
+        entries_df.to_csv(classification_dataset_path, index=False)
+
+    save_folder = os.path.join("data", args.project_name, "analysis")
+    classification_df = _import_classification_dataset(
+        classification_dataset_path, args.classification_column
+    )
+    for country in args.countries_to_analyze:
+        one_country_classification_df = classification_df[
+            classification_df["Primary Country"].apply(lambda x: country in x)
+        ]
+        answer_df, risk_list_df, key_indicator_numbers_df = (
+            _perform_documents_based_analysis(
+                one_country_classification_df,
+                country,
+                args.classification_column,
+                args.n_kept_entries,
+                os.path.join(save_folder, country),
+                args.answers_save_path,
+                args.risk_list_save_path,
+                args.key_indicator_numbers_save_path,
+            )
+        )

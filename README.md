@@ -11,7 +11,7 @@
 ### II. Analysis generation
 
 1. Context analysis: Pillar-level (Web-based, last year) + KPIs on keys pre-crisis vulnerabilities
-2. Narrative of latest shocks (web-based, from start date, specific prompt), extract number of poeple in need.
+2. Narrative of latest shocks from 2 months (web-based, from start date, specific prompt), extract number of poeple in need. USING DATAMINR
 3. displacement with all subpillars
 4. Humanitarian Access with all subpillars
 5. Sector-wise analysis: one sector, one pillar. not more. Including overview, with sources for each, with reliability score
@@ -21,11 +21,13 @@
   3.1 Number of people displaced  
     3.2 Number of people in need  
     3.3 Number of people dead, injured, missing
-7. From generated anlayses, list of risks
+7. From generated anlayses, list of risks  
   7.1 Number of People Exposed  
     7.2 Short-term proba  
     7.3 Mid-term proba  
-    7.4 Early Warning Indicators
+    7.4 Early Warning Indicators  
+
+
 
 ### HTML with key indicators and small pop-ups when needed
 
