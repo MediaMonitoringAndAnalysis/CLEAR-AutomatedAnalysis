@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
             background: white;
             border-bottom: 1px solid #d1d5db;
             padding: 30px 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -93,7 +94,7 @@
         .country-button.active {
             background: #2563eb;
             color: white;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
 
         .tabs {
@@ -152,12 +153,12 @@
             border: 1px solid #d1d5db;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             transition: box-shadow 0.3s;
         }
 
         .metric-card:hover {
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
 
         .metric-label {
@@ -210,7 +211,7 @@
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
@@ -343,6 +344,11 @@
             color: #92400e;
         }
 
+        .badge-serious {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
         .sector-progress {
             width: 100%;
             height: 6px;
@@ -359,6 +365,107 @@
 
         .sector-progress-fill.severe {
             background: #f97316;
+        }
+
+        .badge-unknown {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-content {
+            display: none;
+            position: absolute;
+            bottom: 130%;
+            right: 0;
+            background: #1f2937;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            width: 270px;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .tooltip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 16px;
+            border: 6px solid transparent;
+            border-top-color: #1f2937;
+        }
+
+        .tooltip-wrapper:hover .tooltip-content {
+            display: block;
+        }
+
+        .tooltip-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #9ca3af;
+        }
+
+        .tooltip-risk {
+            padding: 4px 0;
+            border-bottom: 1px solid #374151;
+            font-size: 11px;
+        }
+
+        .tooltip-risk:last-child {
+            border-bottom: none;
+        }
+
+        .sector-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sector-table th {
+            text-align: center;
+            padding: 10px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .sector-table th:first-child {
+            text-align: left;
+        }
+
+        .sector-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .sector-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            color: #1f2937;
+        }
+
+        .sector-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .sector-table tr:hover td {
+            background: #f9fafb;
         }
 
         .scenario-grid {
@@ -407,7 +514,7 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .scenario-desc {
@@ -520,20 +627,176 @@
                 font-size: 12px;
             }
         }
+
+        .key-numbers-section {
+            margin-top: 25px;
+        }
+
+        .key-numbers-section h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .key-numbers-sector-block {
+            margin-bottom: 20px;
+        }
+
+        .key-numbers-sector-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6b7280;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .key-numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .key-number-card {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #f97316;
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .key-number-card.critical {
+            background: #fff1f2;
+            border-color: #fecdd3;
+            border-left-color: #dc2626;
+        }
+
+        .key-number-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: #dc2626;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+
+        .key-number-unit {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #f97316;
+            margin-bottom: 6px;
+        }
+
+        .key-number-label {
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.4;
+        }
+
+        .sector-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin-top: 4px;
+        }
+
+        .sector-intervention-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .sector-intervention-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fff;
+        }
+
+        .sector-intervention-body {
+            padding: 12px 14px;
+            background: #fff;
+        }
+
+        .sector-intervention-body ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .sector-intervention-body li {
+            padding: 4px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .sector-intervention-body li:last-child {
+            border-bottom: none;
+        }
+
+        .sector-color-health       { background: #dc2626; }
+        .sector-color-shelter      { background: #7c3aed; }
+        .sector-color-education    { background: #2563eb; }
+        .sector-color-protection   { background: #d97706; }
+        .sector-color-food         { background: #16a34a; }
+        .sector-color-wash         { background: #0891b2; }
+        .sector-color-livelihoods  { background: #9333ea; }
+        .sector-color-logistics    { background: #6b7280; }
+        .sector-color-displacement { background: #ea580c; }
+        .sector-color-access       { background: #be123c; }
+        .sector-color-shock        { background: #374151; }
+        .sector-color-default      { background: #4b5563; }
     </style>
+    <!-- SECTORS_DATA_START -->
+    <script src="shown_risks_data.js"></script>
+    <!-- SECTORS_DATA_END -->
+    <!-- HUMANITARIAN_ACCESS_DATA_START -->
+    <script src="humanitarian_access_data.js"></script>
+    <!-- HUMANITARIAN_ACCESS_DATA_END -->
+    <!-- KEY_SECTOR_NUMBERS_DATA_START -->
+    <script src="key_sector_numbers_data.js"></script>
+    <!-- KEY_SECTOR_NUMBERS_DATA_END -->
+    <!-- PRECRISIS_DATA_START -->
+    <script src="precrisis_vulnerabilities_data.js"></script>
+    <!-- PRECRISIS_DATA_END -->
+    <!-- CURRENT_HAZARDS_AND_THREATS_DATA_START -->
+    <script src="current_hazards_and_threats_data.js"></script>
+    <!-- CURRENT_HAZARDS_AND_THREATS_DATA_END -->
+    <!-- DISPLACEMENT_DATA_START -->
+    <script src="displacement_data.js"></script>
+    <!-- DISPLACEMENT_DATA_END -->
+    <!-- INTERVENTIONS_DATA_START -->
+    <script src="top_priority_interventions_data.js"></script>
+    <!-- INTERVENTIONS_DATA_END -->
+    <!-- SECTORAL_NEEDS_DATA_START -->
+    <script src="top_sectoral_needs_data.js"></script>
+    <!-- SECTORAL_NEEDS_DATA_END -->
 </head>
+
 <body>
     <div class="header">
         <div class="header-content">
             <div class="header-title" data-country-field="headerTitle">Iran Crisis 2026</div>
-            <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time Data</div>
+            <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time
+                Data</div>
             <div class="header-time">Last Updated: March 9, 2026 • 14:30 UTC</div>
 
             <div class="country-switcher">
                 <span class="country-switcher-label">Country Focus</span>
                 <div class="country-options">
-                    <button class="country-button active" data-country-key="iran" onclick="switchCountry('iran')">Iran</button>
-                    <button class="country-button" data-country-key="lebanon" onclick="switchCountry('lebanon')">Lebanon</button>
+                    <button class="country-button active" data-country-key="iran"
+                        onclick="switchCountry('iran')">Iran</button>
+                    <button class="country-button" data-country-key="lebanon"
+                        onclick="switchCountry('lebanon')">Lebanon</button>
                 </div>
             </div>
 
@@ -541,8 +804,8 @@
                 <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
                 <button class="tab-button" onclick="switchTab('displacement')">📍 Displacement</button>
                 <button class="tab-button" onclick="switchTab('sectors')">🏢 Sectors</button>
-                <button class="tab-button" onclick="switchTab('response')">🆘 Response Gap</button>
-                <button class="tab-button" onclick="switchTab('scenarios')">🔮 Forecasting</button>
+                <!-- <button class="tab-button" onclick="switchTab('response')">🆘 Response Gap</button> -->
+                <button class="tab-button" onclick="switchTab('scenarios')">🔮 Response Planning</button>
             </div>
         </div>
     </div>
@@ -557,32 +820,40 @@
                     <div class="metric-label">Deaths Confirmed</div>
                     <div class="metric-value">1,332+</div>
                     <div class="metric-change">+500 past 48 hours</div>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Internally Displaced</div>
                     <div class="metric-value">330,000</div>
                     <div class="metric-change" data-country-field="overviewIdpChange">+100K from Iran</div>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Health Facilities Hit</div>
                     <div class="metric-value severe">13</div>
                     <div class="metric-change severe">WHO verified</div>
-                    <div class="progress-bar"><div class="progress-fill" style="background: #f97316;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="background: #f97316;"></div>
+                    </div>
                 </div>
 
                 <div class="metric-card">
                     <div class="metric-label">Countries Affected</div>
                     <div class="metric-value severe">16</div>
                     <div class="metric-change severe">Regional spillover</div>
-                    <div class="progress-bar"><div class="progress-fill" style="background: #f97316;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="background: #f97316;"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
+            <!-- <div class="card">
                 <h2>Crisis Status ⚠️</h2>
                 <div class="status-grid">
                     <div class="status-item">
@@ -601,28 +872,20 @@
                         <div class="status-desc">+500 deaths in 48h</div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="two-col">
                 <div class="context-box info">
-                    <h3>📌 What Triggered This</h3>
-                    <ul>
-                        <li>• US-Israeli coordinated strikes on <strong>February 28, 2026</strong></li>
-                        <li>• Supreme Leader <strong>Ali Khamenei killed</strong>, along with senior officials</li>
-                        <li>• Strikes on military, government, and civilian infrastructure</li>
-                        <li>• Iranian retaliatory missile/drone attacks across region</li>
-                        <li>• Hezbollah escalation in Lebanon (March 2)</li>
+                    <h3>📌 Current Hazards and Threats</h3>
+                    <ul id="current-hazards-and-threats-list">
+                        <li style="color:#9ca3af;">Loading data…</li>
                     </ul>
                 </div>
 
                 <div class="context-box warning">
                     <h3>⚠️ Pre-Crisis Vulnerabilities</h3>
-                    <ul>
-                        <li>• Economic collapse: <strong>60% inflation</strong>, currency collapse</li>
-                        <li>• Mass protests: <strong>30,000+ killed</strong> in January crackdown</li>
-                        <li>• Refugee hosting: <strong>3.7 million</strong> already in Iran</li>
-                        <li>• Supply chain crisis: <strong>food prices +50%</strong> year-over-year</li>
-                        <li>• Health system strain from prior violence</li>
+                    <ul id="precrisis-vulnerabilities-list">
+                        <li style="color:#9ca3af;">Loading data…</li>
                     </ul>
                 </div>
             </div>
@@ -634,9 +897,12 @@
 
             <div class="grid-2">
                 <div class="card">
-                    <div class="status-label" data-country-field="displacementPrimaryLabel">Iran (Internal Displacement)</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;" data-country-field="displacementPrimaryValue">~100,000</div>
-                    <p style="font-size: 13px; color: #6b7280;" data-country-field="displacementPrimaryDesc">IDPs from urban centers seeking rural safety</p>
+                    <div class="status-label" data-country-field="displacementPrimaryLabel">Iran (Internal Displacement)
+                    </div>
+                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;"
+                        data-country-field="displacementPrimaryValue">~100,000</div>
+                    <p style="font-size: 13px; color: #6b7280;" data-country-field="displacementPrimaryDesc">IDPs from
+                        urban centers seeking rural safety</p>
                 </div>
 
                 <div class="card">
@@ -658,107 +924,61 @@
                 </div>
             </div>
 
-            <div class="card">
-                <h2>Key Displacement Drivers</h2>
-                <div class="grid-2">
-                    <div style="padding: 15px; background: #f9fafb; border-radius: 6px;">
-                        <div style="font-size: 24px; margin-bottom: 10px;">💣</div>
-                        <div style="font-weight: 600; margin-bottom: 5px;">Direct Strikes</div>
-                        <p style="font-size: 12px; color: #6b7280;">Bombing of residential areas in urban centers</p>
-                    </div>
-                    <div style="padding: 15px; background: #f9fafb; border-radius: 6px;">
-                        <div style="font-size: 24px; margin-bottom: 10px;">😱</div>
-                        <div style="font-weight: 600; margin-bottom: 5px;">Mass Panic</div>
-                        <p style="font-size: 12px; color: #6b7280;">Fear of continued bombardment driving flight</p>
-                    </div>
-                    <div style="padding: 15px; background: #f9fafb; border-radius: 6px;">
-                        <div style="font-size: 24px; margin-bottom: 10px;">📦</div>
-                        <div style="font-weight: 600; margin-bottom: 5px;">Supply Crisis</div>
-                        <p style="font-size: 12px; color: #6b7280;">Anticipation of severe shortages in cities</p>
-                    </div>
-                    <div style="padding: 15px; background: #f9fafb; border-radius: 6px;">
-                        <div style="font-size: 24px; margin-bottom: 10px;">⚖️</div>
-                        <div style="font-weight: 600; margin-bottom: 5px;">Political Risk</div>
-                        <p style="font-size: 12px; color: #6b7280;">Potential civil unrest and instability</p>
-                    </div>
+            <div class="two-col">
+                <div class="context-box info">
+                    <h3>📌 Key Displacement Drivers</h3>
+                    <ul id="displacement-push-factors-list">
+                        <li style="color:#9ca3af;">Loading data…</li>
+                    </ul>
+                </div>
+
+                <div class="context-box warning">
+                    <h3>🏠 Return Intentions</h3>
+                    <ul id="displacement-intentions-list">
+                        <li style="color:#9ca3af;">Loading data…</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <!-- SECTORS TAB -->
         <div id="sectors" class="tab-content">
-            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🏢 Humanitarian Conditions by Sector</h2>
+            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🏢 Sector-wise Analysis
+            </h2>
 
-            <div class="card">
-                <h3>Severity Assessment</h3>
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Mortality/Morbidity</div>
-                        <span class="badge badge-critical">CRITICAL</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill" style="width: 95%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Food Security</div>
-                        <span class="badge badge-critical">CRITICAL</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill" style="width: 90%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Shelter/NFI</div>
-                        <span class="badge badge-critical">CRITICAL</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill" style="width: 95%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Health</div>
-                        <span class="badge badge-critical">CRITICAL</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill" style="width: 95%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">WASH</div>
-                        <span class="badge badge-severe">SEVERE</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill severe" style="width: 85%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Protection</div>
-                        <span class="badge badge-critical">CRITICAL</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill" style="width: 90%;"></div></div>
-                </div>
-
-                <div class="sector-bar">
-                    <div class="sector-header">
-                        <div class="sector-name">Education</div>
-                        <span class="badge badge-severe">SEVERE</span>
-                    </div>
-                    <div class="sector-progress"><div class="sector-progress-fill severe" style="width: 80%;"></div></div>
+            <!-- KEY NUMBERS SECTION -->
+            <div class="card key-numbers-section">
+                <h3>⚠️ Critical Numbers by Sector</h3>
+                <div id="key-numbers-container">
+                    <p style="color:#9ca3af;font-size:13px;">Loading data…</p>
                 </div>
             </div>
 
-            <div class="grid-2">
-                <div class="card">
-                    <div class="status-label">Health Facilities Attacked</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;">13</div>
-                    <p style="font-size: 13px; color: #6b7280;">WHO verified attacks on health infrastructure</p>
-                </div>
+            <div class="card">
+                <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Severity Assessment by Category</h3>
+                <!-- <p style="font-size: 12px; color: #6b7280; margin-bottom: 18px;"></p> -->
+                <table class="sector-table">
+                    <thead>
+                        <tr>
+                            <th>Sector</th>
+                            <th>Impact</th>
+                            <th>Humanitarian Conditions</th>
+                            <th>At Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sectors-tbody">
+                        <tr>
+                            <td colspan="4" style="color:#9ca3af;text-align:center;padding:20px;">Loading sector data…
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                <div class="card">
-                    <div class="status-label">Children Killed</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;">190+</div>
-                    <p style="font-size: 13px; color: #6b7280;">Including 150 in school bombing in Minab</p>
+            <div class="card" style="margin-top: 20px;">
+                <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">🎯 Top Needs by Sector</h3>
+                <div id="sectoral-needs-container">
+                    <p style="color:#9ca3af;font-size:13px;">Loading data…</p>
                 </div>
             </div>
         </div>
@@ -767,19 +987,10 @@
         <div id="response" class="tab-content">
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🆘 Response Capacity & Access</h2>
 
-            <div class="two-col">
-                <div class="context-box" style="border-left-color: #dc2626; background: #fee2e2;">
-                    <h3>🚧 Critical Access Barriers</h3>
-                    <ul>
-                        <li><strong>Internet Blackout:</strong> 4% connectivity blocks communications</li>
-                        <li><strong>Airspace Closures:</strong> Regional flights halted</li>
-                        <li><strong>Strait Disruption:</strong> Maritime routes threatened</li>
-                        <li><strong>Border Closures:</strong> Limited refugee reception</li>
-                        <li><strong>Security Threats:</strong> Limited humanitarian access</li>
-                    </ul>
-                </div>
+            <!-- <div class="two-col" style="grid-template-columns: 1fr; width: 100%;"> -->
+            
 
-                <div class="context-box" style="border-left-color: #16a34a; background: #f0fdf4;">
+                <!-- <div class="context-box" style="border-left-color: #16a34a; background: #f0fdf4;">
                     <h3>✓ Response Actors & Capacity</h3>
                     <ul>
                         <li><strong>UNHCR:</strong> Largest UN agency; mobilizing</li>
@@ -788,8 +999,8 @@
                         <li><strong>IFRC/Red Crescent:</strong> Local capacity present</li>
                         <li><strong>Gap:</strong> Limited NGO presence</li>
                     </ul>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
 
             <div class="card">
                 <h3>Priority Needs (Next 2-4 weeks)</h3>
@@ -835,15 +1046,26 @@
 
         <!-- SCENARIOS TAB -->
         <div id="scenarios" class="tab-content">
-            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🔮 Scenario Analysis & Forecasting</h2>
 
+            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🚧 Current Critical Access Issues</h2>
+            <div class="context-box" style="border-left-color: #dc2626; background: #fee2e2;">
+                <!-- <h3></h3> -->
+                <ul id="access-barriers-list">
+                    <li style="color:#9ca3af;">Loading access data…</li>
+                </ul>
+            </div>
+
+            <div style="height: 24px;"></div>
+
+            <!-- <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🔮 Scenarios</h2>
             <div class="scenario-grid">
                 <div class="scenario-card red">
                     <div class="scenario-header">
                         <div class="scenario-title">Escalation</div>
                         <span class="scenario-prob" style="background: #fecaca; color: #991b1b;">50%</span>
                     </div>
-                    <div class="scenario-desc" data-country-field="scenarioEscalationDesc">Sustained military conflict; Iranian leadership consolidates; regional involvement escalates</div>
+                    <div class="scenario-desc" data-country-field="scenarioEscalationDesc">Sustained military conflict;
+                        Iranian leadership consolidates; regional involvement escalates</div>
                     <div class="scenario-impacts">
                         <div class="scenario-impacts-label">Humanitarian Impact</div>
                         <ul class="scenario-impacts-list">
@@ -861,7 +1083,8 @@
                         <div class="scenario-title">De-escalation</div>
                         <span class="scenario-prob" style="background: #86efac; color: #166534;">25%</span>
                     </div>
-                    <div class="scenario-desc">Rapid negotiations; ceasefire within weeks; focus shifts to early recovery</div>
+                    <div class="scenario-desc">Rapid negotiations; ceasefire within weeks; focus shifts to early
+                        recovery</div>
                     <div class="scenario-impacts">
                         <div class="scenario-impacts-label">Humanitarian Impact</div>
                         <ul class="scenario-impacts-list">
@@ -879,7 +1102,8 @@
                         <div class="scenario-title">Internal Conflict</div>
                         <span class="scenario-prob" style="background: #fde68a; color: #92400e;">35%</span>
                     </div>
-                    <div class="scenario-desc">Regime fractures; military splits; civil conflict emerges; proxy activation</div>
+                    <div class="scenario-desc">Regime fractures; military splits; civil conflict emerges; proxy
+                        activation</div>
                     <div class="scenario-impacts">
                         <div class="scenario-impacts-label">Humanitarian Impact</div>
                         <ul class="scenario-impacts-list">
@@ -896,26 +1120,48 @@
             <div class="card">
                 <h3>Early Warning Indicators (Monitor Daily)</h3>
                 <div class="grid-2">
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🎖️ Military escalation or ground movements</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🏛️ Political collapse or succession struggles</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">👥 Large refugee crossings into neighboring countries</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">💰 Economic shock: Oil prices >$120/barrel</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🦠 Disease outbreaks or malnutrition clusters</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🚫 Access deterioration or border closures</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">📡 Internet restoration status</div>
-                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">⚖️ ICC actions or humanitarian law violations</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🎖️ Military
+                        escalation or ground movements</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🏛️ Political
+                        collapse or succession struggles</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">👥 Large
+                        refugee crossings into neighboring countries</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">💰 Economic
+                        shock: Oil prices >$120/barrel</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🦠 Disease
+                        outbreaks or malnutrition clusters</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">🚫 Access
+                        deterioration or border closures</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">📡 Internet
+                        restoration status</div>
+                    <div style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 12px;">⚖️ ICC actions
+                        or humanitarian law violations</div>
                 </div>
-            </div>
+            </div> -->
 
+            <h2>📋 Priority Interventions</h2>
+            <div style="height: 16px;"></div>
+            <div id="priority-interventions-container">
+                <p style="color:#9ca3af;font-size:13px;">Loading data…</p>
+            </div>
+            <div style="height: 28px;"></div>
+
+            <!-- <h2>📋 Recommended Actions</h2>
+            <div style="height: 24px;"></div>
+            
             <div class="card" style="background: #dbeafe;">
-                <h3>📋 Recommended Actions</h3>
+                
                 <ul style="list-style: none; font-size: 13px; color: #1f2937; line-height: 1.8;">
-                    <li><strong>Immediate (48 hours):</strong> Scale emergency shelter, food, water, health services to 100K+ displaced</li>
-                    <li><strong>Week 1:</strong> Establish humanitarian coordination; negotiate access agreements with all parties</li>
-                    <li data-country-field="recommendedCrossBorder"><strong>Weeks 2-4:</strong> Expand cross-border support in Pakistan, Turkey, Afghanistan based on scenario</li>
+                    <li><strong>Immediate (48 hours):</strong> Scale emergency shelter, food, water, health services to
+                        100K+ displaced</li>
+                    <li><strong>Week 1:</strong> Establish humanitarian coordination; negotiate access agreements with
+                        all parties</li>
+                    <li data-country-field="recommendedCrossBorder"><strong>Weeks 2-4:</strong> Expand cross-border
+                        support in Pakistan, Turkey, Afghanistan based on scenario</li>
                     <li><strong>Ongoing:</strong> Monitor early warning indicators; reassess scenarios daily</li>
                 </ul>
-            </div>
+            </div> -->
+
         </div>
     </div>
 
@@ -984,7 +1230,232 @@
             event.target.classList.add('active');
         }
 
+        function buildSectorsTable() {
+            const tbody = document.getElementById('sectors-tbody');
+            if (!tbody) return;
+
+            const data = window.SHOWN_RISKS_DATA;
+            if (!data) {
+                tbody.innerHTML = '<tr><td colspan="4" style="color:#9ca3af;text-align:center;padding:20px;">Sector data not available.</td></tr>';
+                return;
+            }
+
+            const CATEGORIES = [
+                { key: 'Impact', label: 'Impact' },
+                { key: 'Humanitarian Conditions', label: 'Humanitarian Conditions' },
+                { key: 'At Risk', label: 'At Risk' }
+            ];
+
+            const SEVERITY_CLASS = {
+                'CRITICAL': 'badge-critical',
+                'SEVERE': 'badge-severe',
+                'SERIOUS': 'badge-serious',
+                'MODERATE': 'badge-moderate',
+                'MINOR': 'badge-minor'
+            };
+
+            // Collect all sector names in insertion order across all categories
+            const sectorSet = new Set();
+            CATEGORIES.forEach(({ key }) => {
+                if (data[key]) Object.keys(data[key]).forEach(s => sectorSet.add(s));
+            });
+
+            const rows = Array.from(sectorSet).sort().map(sector => {
+                const cells = CATEGORIES.map(({ key, label }) => {
+                    const entry = data[key] && data[key][sector];
+                    const isUnknown = !entry || entry.severity_scale === 'UNKNOWN' || entry.highest_score === null;
+                    if (isUnknown) {
+                        return `<td><span class="badge badge-unknown">NO INFO</span></td>`;
+                    }
+                    const badgeClass = SEVERITY_CLASS[entry.severity_scale] || 'badge-unknown';
+                    const risks = (entry.top3_risks || []).slice(0, 3);
+                    const riskHtml = risks.length
+                        ? risks.map(r => `<div class="tooltip-risk">${r}</div>`).join('')
+                        : '<div class="tooltip-risk">No risk details available.</div>';
+                    return `<td>
+                        <div class="tooltip-wrapper">
+                            <span class="badge ${badgeClass}">${entry.severity_scale}</span>
+                            <div class="tooltip-content">
+                                <div class="tooltip-title">Top Risks — ${label}</div>
+                                ${riskHtml}
+                            </div>
+                        </div>
+                    </td>`;
+                });
+                return `<tr><td>${sector}</td>${cells.join('')}</tr>`;
+            });
+
+            tbody.innerHTML = rows.join('');
+        }
+
+        buildSectorsTable();
+        buildAccessBarriers();
+        buildKeyNumbers();
+        buildPrecrisisVulnerabilities();
+        buildCurrentHazardsAndThreats();
+        buildDisplacementData();
+        buildPriorityInterventions();
+        buildSectoralNeeds();
+
         switchCountry('iran');
+
+        function buildKeyNumbers() {
+            const container = document.getElementById('key-numbers-container');
+            if (!container) return;
+
+            const data = window.KEY_NUMBERS_DATA;
+            if (!data || Object.keys(data).length === 0) {
+                container.innerHTML = '<p style="color:#9ca3af;font-size:13px;">No data available.</p>';
+                return;
+            }
+
+            const formatNumber = (n) => {
+                if (n === null || n === undefined) return '—';
+                if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+                if (n >= 1000) return (n / 1000).toFixed(0) + 'K';
+                return n % 1 === 0 ? String(n) : String(n);
+            };
+
+            const isCritical = (n) => n !== null && n !== undefined && n >= 100;
+
+            const blocks = Object.entries(data).map(([sector, items]) => {
+                const cards = items.map(item => {
+                    const cls = isCritical(item.number) ? 'key-number-card critical' : 'key-number-card';
+                    return `
+                        <div class="${cls}">
+                            <div class="key-number-value">${formatNumber(item.number)}</div>
+                            <div class="key-number-unit">${item.unit}</div>
+                            <div class="key-number-label">${item.key_indicator}</div>
+                        </div>`;
+                }).join('');
+
+                return `
+                    <div class="key-numbers-sector-block">
+                        <div class="key-numbers-sector-label">${sector}</div>
+                        <div class="key-numbers-grid">${cards}</div>
+                    </div>`;
+            }).join('');
+
+            container.innerHTML = blocks;
+        }
+
+        function sectorColorClass(sector) {
+            const s = sector.toLowerCase();
+            if (s.includes('health'))       return 'sector-color-health';
+            if (s.includes('shelter'))      return 'sector-color-shelter';
+            if (s.includes('education'))    return 'sector-color-education';
+            if (s.includes('protection'))   return 'sector-color-protection';
+            if (s.includes('food'))         return 'sector-color-food';
+            if (s.includes('wash'))         return 'sector-color-wash';
+            if (s.includes('livelihood'))   return 'sector-color-livelihoods';
+            if (s.includes('logistics'))    return 'sector-color-logistics';
+            if (s.includes('displacement')) return 'sector-color-displacement';
+            if (s.includes('access'))       return 'sector-color-access';
+            if (s.includes('shock'))        return 'sector-color-shock';
+            return 'sector-color-default';
+        }
+
+        function buildSectorCards(data) {
+            return Object.entries(data).map(([sector, items]) => {
+                const colorClass = sectorColorClass(sector);
+                const liItems = items.map(item => `<li>• ${item}</li>`).join('');
+                return `
+                    <div class="sector-intervention-card">
+                        <div class="sector-intervention-header ${colorClass}">${sector}</div>
+                        <div class="sector-intervention-body"><ul>${liItems}</ul></div>
+                    </div>`;
+            }).join('');
+        }
+
+        function buildPriorityInterventions() {
+            const container = document.getElementById('priority-interventions-container');
+            if (!container) return;
+            const data = window.TOP_PRIORITY_INTERVENTIONS_DATA;
+            if (!data || Object.keys(data).length === 0) {
+                container.innerHTML = '<p style="color:#9ca3af;font-size:13px;">No data available.</p>';
+                return;
+            }
+            container.innerHTML = `<div class="sector-cards-grid">${buildSectorCards(data)}</div>`;
+        }
+
+        function buildSectoralNeeds() {
+            const container = document.getElementById('sectoral-needs-container');
+            if (!container) return;
+            const data = window.TOP_SECTORAL_NEEDS_DATA;
+            if (!data || Object.keys(data).length === 0) {
+                container.innerHTML = '<p style="color:#9ca3af;font-size:13px;">No data available.</p>';
+                return;
+            }
+            container.innerHTML = `<div class="sector-cards-grid">${buildSectorCards(data)}</div>`;
+        }
+
+        function buildDisplacementData() {
+            const data = window.DISPLACEMENT_DATA;
+            if (!data) return;
+
+            const pushList = document.getElementById('displacement-push-factors-list');
+            if (pushList && data['Push Factors'] && data['Push Factors'].length > 0) {
+                pushList.innerHTML = data['Push Factors'].map(v => `<li>• ${v}</li>`).join('');
+            }
+
+            const intentionsList = document.getElementById('displacement-intentions-list');
+            if (intentionsList && data['Intentions'] && data['Intentions'].length > 0) {
+                intentionsList.innerHTML = data['Intentions'].map(v => `<li>• ${v}</li>`).join('');
+            }
+        }
+
+        function buildCurrentHazardsAndThreats() {
+            const list = document.getElementById('current-hazards-and-threats-list');
+            if (!list) return;
+
+            const data = window.CURRENT_HAZARDS_AND_THREATS_DATA;
+            if (!data || data.length === 0) {
+                list.innerHTML = '<li style="color:#9ca3af;">No data available.</li>';
+                return;
+            }
+
+            list.innerHTML = data.map(v => `<li>• ${v}</li>`).join('');
+        }
+
+        function buildPrecrisisVulnerabilities() {
+            const list = document.getElementById('precrisis-vulnerabilities-list');
+            if (!list) return;
+
+            const data = window.PRECRISIS_VULNERABILITIES_DATA;
+            if (!data || data.length === 0) {
+                list.innerHTML = '<li style="color:#9ca3af;">No data available.</li>';
+                return;
+            }
+
+            list.innerHTML = data.map(v => `<li>• ${v}</li>`).join('');
+        }
+        
+
+        function buildAccessBarriers() {
+            const list = document.getElementById('access-barriers-list');
+            if (!list) return;
+
+            const data = window.HUMANITARIAN_ACCESS_DATA;
+            if (!data || Object.keys(data).length === 0) {
+                list.innerHTML = '<li style="color:#9ca3af;">No access data available.</li>';
+                return;
+            }
+
+            const items = Object.entries(data).map(([subpillar, content]) => {
+                const parts = content.split('\n');
+                const risks = parts[0] || '';
+                const keyNumbers = parts[1] || '';
+                let html = `<li><strong>${subpillar}:</strong> ${risks}`;
+                if (keyNumbers) {
+                    html += `<br><span style="font-size:12px;color:#6b7280;">${keyNumbers}</span>`;
+                }
+                html += '</li>';
+                return html;
+            });
+
+            list.innerHTML = items.join('');
+        }
     </script>
 </body>
+
 </html>

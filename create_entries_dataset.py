@@ -5,6 +5,7 @@ from src.analysis.documents_based_analysis import _perform_documents_based_analy
 import argparse
 import dotenv
 import os
+from typing import Dict
 
 dotenv.load_dotenv()
 
@@ -25,7 +26,9 @@ def _extract_entries(
     leads[entries_column] = entries
     leads = leads.explode(entries_column)
     leads = leads.drop_duplicates(subset=[entries_column])
-    leads = leads[leads[entries_column].apply(lambda x: len(str(x)) > 3)].drop(columns=[text_column])
+    leads = leads[leads[entries_column].apply(lambda x: len(str(x)) > 3)].drop(
+        columns=[text_column]
+    )
     return leads
 
 
@@ -34,33 +37,35 @@ def _classify_entries(
     entries_column: str = "Extraction Text",
     classification_column: str = "First Level Classification",
     prediction_ratio: float = 1.05,
+    return_ratio: bool = True,
 ) -> pd.DataFrame:
     from humanitarian_extract_classificator import humbert_classification
 
     entries[classification_column] = humbert_classification(
-        entries[entries_column].tolist(), prediction_ratio=prediction_ratio
+        entries[entries_column].tolist(),
+        prediction_ratio=prediction_ratio,
+        return_ratio=return_ratio,
     )
     return entries
 
 
-def _preprocess_classification_results(classification_results: str) -> list[str]:
-    number_tags = {
-        "Pillars 2D->At Risk->Number Of People At Risk": "Pillars 2D->At Risk->Risk And Vulnerabilities",
-        "Pillars 2D->Impact->Number Of People Affected": "Pillars 2D->Impact->Impact On People",
-        "Pillars 2D->Humanitarian Conditions->Number Of People In Need": "Pillars 2D->Humanitarian Conditions->Living Standards",
-    }
-    final_classification = []
-    classification_results_list = literal_eval(classification_results)
-    for tag in classification_results_list:
-        if tag in number_tags:
-            final_classification.append(number_tags[tag])
-        else:
-            final_classification.append(
-                tag.replace(
-                    "Pillars 2D->Priority Interventions", "Pillars 2D->Priority Needs"
-                )
-            )
-    return sorted(list(set(final_classification)))
+def _preprocess_classification_results(classification_results: str) -> Dict[str, float]:
+    # number_tags = {
+    #     "Pillars 2D->At Risk->Number Of People At Risk": "Pillars 2D->At Risk->Risk And Vulnerabilities",
+    #     "Pillars 2D->Impact->Number Of People Affected": "Pillars 2D->Impact->Impact On People",
+    #     "Pillars 2D->Humanitarian Conditions->Number Of People In Need": "Pillars 2D->Humanitarian Conditions->Living Standards",
+    # }
+    classification_results_dict = literal_eval(classification_results)
+    # final_classification = {}
+    # for tag in classification_results_list:
+    #     if tag in number_tags:
+    #         final_classification[number_tags[tag]] = classification_results_list[tag]
+    #     else:
+    #         final_classification[tag.replace(
+    #                 "Pillars 2D->Priority Interventions", "Pillars 2D->Priority Needs"
+    #             )
+    #         ] = classification_results_list[tag]
+    return classification_results_dict
 
 
 def _import_classification_dataset(
@@ -86,11 +91,25 @@ if __name__ == "__main__":
         "--classification_column", type=str, default="First Level Classification"
     )
     parser.add_argument("--prediction_ratio", type=float, default=1.05)
-    parser.add_argument("--countries_to_analyze", type=str, nargs="+", default=["Iran", "Lebanon"])
-    parser.add_argument("--n_kept_entries", type=int, default=15)
+    parser.add_argument(
+        "--countries_to_analyze", type=str, nargs="+", default="Lebanon"
+    )
+    parser.add_argument("--n_kept_entries", type=int, default=12)
     parser.add_argument("--answers_save_path", type=str, default="answers.json")
     parser.add_argument("--risk_list_save_path", type=str, default="risk_list.json")
-    parser.add_argument("--key_indicator_numbers_save_path", type=str, default="key_indicator_numbers.json")
+    parser.add_argument(
+        "--key_indicator_numbers_save_path",
+        type=str,
+        default="key_indicator_numbers.json",
+    )
+    parser.add_argument(
+        "--priority_needs_save_path", type=str, default="priority_needs.json"
+    )
+    parser.add_argument(
+        "--priority_interventions_save_path",
+        type=str,
+        default="priority_interventions.json",
+    )
     args = parser.parse_args()
 
     sample = args.sample_bool.lower() == "true"
@@ -120,7 +139,9 @@ if __name__ == "__main__":
 
     if args.classification_column not in entries_df.columns:
         entries_df = _classify_entries(
-            entries_df, classification_column=args.classification_column, prediction_ratio=args.prediction_ratio
+            entries_df,
+            classification_column=args.classification_column,
+            prediction_ratio=args.prediction_ratio,
         )
         entries_df.to_csv(classification_dataset_path, index=False)
 
@@ -132,19 +153,19 @@ if __name__ == "__main__":
     classification_df = _import_classification_dataset(
         classification_dataset_path, args.classification_column
     )
-    for country in args.countries_to_analyze:
+    for country in args.countries_to_analyze.split(","):
         one_country_classification_df = classification_df[
             classification_df["Primary Country"].apply(lambda x: country in x)
         ]
-        answer_df, risk_list_df, key_indicator_numbers_df = (
-            _perform_documents_based_analysis(
-                one_country_classification_df,
-                country,
-                args.classification_column,
-                args.n_kept_entries,
-                os.path.join(save_folder, country),
-                args.answers_save_path,
-                args.risk_list_save_path,
-                args.key_indicator_numbers_save_path,
-            )
+        _perform_documents_based_analysis(
+            one_country_classification_df,
+            country,
+            args.classification_column,
+            args.n_kept_entries,
+            os.path.join(save_folder, country),
+            args.answers_save_path,
+            args.risk_list_save_path,
+            args.key_indicator_numbers_save_path,
+            args.priority_needs_save_path,
+            args.priority_interventions_save_path,
         )

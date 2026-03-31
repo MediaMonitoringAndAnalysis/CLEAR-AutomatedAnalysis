@@ -11,13 +11,13 @@ context_questions = {
 }
 
 displacement_questions = {
-    "Type-Numbers-Movements": (
-        "How many people are displaced (IDPs, refugees, returnees, stateless)? "
-        "What displacement settings are they in (camps, collective centres, host families, urban areas)? "
-        "How long have they been displaced, and have some populations been displaced multiple times? "
-        "Where are displacement movements currently occurring, and what are the main origin and destination areas? "
-        "How might the scale and pattern of displacement evolve in the coming months?"
-    ),
+    # "Type-Numbers-Movements": (
+    #     "How many people are displaced (IDPs, refugees, returnees, stateless)? "
+    #     "What displacement settings are they in (camps, collective centres, host families, urban areas)? "
+    #     "How long have they been displaced, and have some populations been displaced multiple times? "
+    #     "Where are displacement movements currently occurring, and what are the main origin and destination areas? "
+    #     "How might the scale and pattern of displacement evolve in the coming months?"
+    # ),
     "Push Factors": (
         "What are the main drivers that forced people to leave their area of origin (conflict, violence, persecution, natural disaster, economic collapse)? "
         "Which specific events or deteriorating conditions triggered displacement? "
