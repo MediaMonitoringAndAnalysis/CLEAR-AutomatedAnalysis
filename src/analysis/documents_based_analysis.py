@@ -234,6 +234,14 @@ def _perform_documents_based_analysis(
     priority_needs_save_path: str = "priority_needs.json",
     priority_interventions_save_path: str = "priority_interventions.json",
 ):
+    answers_save_path = os.path.join(save_folder, answers_save_path)
+    risk_list_save_path = os.path.join(save_folder, risk_list_save_path)
+    key_indicator_numbers_save_path = os.path.join(save_folder, key_indicator_numbers_save_path)
+    priority_needs_save_path = os.path.join(save_folder, priority_needs_save_path)
+    priority_interventions_save_path = os.path.join(save_folder, priority_interventions_save_path)
+
+    if os.path.exists(answers_save_path) and os.path.exists(risk_list_save_path) and os.path.exists(key_indicator_numbers_save_path) and os.path.exists(priority_needs_save_path) and os.path.exists(priority_interventions_save_path):
+        return
 
     os.makedirs(save_folder, exist_ok=True)
     analysis_prompts, analysis_df = _create_analysis_prompts(
@@ -340,23 +348,23 @@ def _perform_documents_based_analysis(
         answer_df[col] = analysis_df[col].values
 
     answer_df.to_json(
-        os.path.join(save_folder, answers_save_path), orient="records", indent=4
+        answers_save_path, orient="records", indent=4
     )
     risk_list_df.to_json(
-        os.path.join(save_folder, risk_list_save_path), orient="records", indent=4
+        risk_list_save_path, orient="records", indent=4
     )
     key_indicator_numbers_df.to_json(
-        os.path.join(save_folder, key_indicator_numbers_save_path),
+        key_indicator_numbers_save_path,
         orient="records",
         indent=4,
     )
     priority_needs_df.to_json(
-        os.path.join(save_folder, priority_needs_save_path),
+        priority_needs_save_path,
         orient="records",
         indent=4,
     )
     priority_interventions_df.to_json(
-        os.path.join(save_folder, priority_interventions_save_path),
+        priority_interventions_save_path,
         orient="records",
         indent=4,
     )

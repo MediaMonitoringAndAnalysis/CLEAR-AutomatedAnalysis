@@ -2,6 +2,7 @@ from ast import literal_eval
 import pandas as pd
 from data_connectors import get_reliefweb_leads
 from src.analysis.documents_based_analysis import _perform_documents_based_analysis
+from src.analysis.numbers_extraction import performs_numbers_extraction
 import argparse
 import dotenv
 import os
@@ -168,4 +169,9 @@ if __name__ == "__main__":
             args.key_indicator_numbers_save_path,
             args.priority_needs_save_path,
             args.priority_interventions_save_path,
+        )
+        numbers_extraction_df_path = os.path.join(save_folder, country, "numbers_extraction.csv")
+        performs_numbers_extraction(
+            one_country_classification_df,
+            numbers_extraction_df_path,
         )

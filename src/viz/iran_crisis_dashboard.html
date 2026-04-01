@@ -773,7 +773,11 @@
     <!-- CURRENT_HAZARDS_AND_THREATS_DATA_END -->
     <!-- DISPLACEMENT_DATA_START -->
     <script src="displacement_data.js"></script>
+    <script src="displacement_risks_data.js"></script>
     <!-- DISPLACEMENT_DATA_END -->
+    <!-- FINAL_NUMBERS_DATA_START -->
+    <script src="final_numbers_data.js"></script>
+    <!-- FINAL_NUMBERS_DATA_END -->
     <!-- INTERVENTIONS_DATA_START -->
     <script src="top_priority_interventions_data.js"></script>
     <!-- INTERVENTIONS_DATA_END -->
@@ -785,7 +789,7 @@
 <body>
     <div class="header">
         <div class="header-content">
-            <div class="header-title" data-country-field="headerTitle">Iran Crisis 2026</div>
+            <div class="header-title" data-country-field="headerTitle">Lebanon Crisis 2026</div>
             <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time
                 Data</div>
             <div class="header-time">Last Updated: March 9, 2026 • 14:30 UTC</div>
@@ -793,9 +797,7 @@
             <div class="country-switcher">
                 <span class="country-switcher-label">Country Focus</span>
                 <div class="country-options">
-                    <button class="country-button active" data-country-key="iran"
-                        onclick="switchCountry('iran')">Iran</button>
-                    <button class="country-button" data-country-key="lebanon"
+                    <button class="country-button active" data-country-key="lebanon"
                         onclick="switchCountry('lebanon')">Lebanon</button>
                 </div>
             </div>
@@ -815,43 +817,7 @@
         <div id="overview" class="tab-content active">
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📊 Crisis Snapshot</h2>
 
-            <div class="grid-4">
-                <div class="metric-card">
-                    <div class="metric-label">Deaths Confirmed</div>
-                    <div class="metric-value">1,332+</div>
-                    <div class="metric-change">+500 past 48 hours</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Internally Displaced</div>
-                    <div class="metric-value">330,000</div>
-                    <div class="metric-change" data-country-field="overviewIdpChange">+100K from Iran</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Health Facilities Hit</div>
-                    <div class="metric-value severe">13</div>
-                    <div class="metric-change severe">WHO verified</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="background: #f97316;"></div>
-                    </div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-label">Countries Affected</div>
-                    <div class="metric-value severe">16</div>
-                    <div class="metric-change severe">Regional spillover</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="background: #f97316;"></div>
-                    </div>
-                </div>
-            </div>
+            <div class="grid-4" id="overview-kpis-grid"></div>
 
             <!-- <div class="card">
                 <h2>Crisis Status ⚠️</h2>
@@ -874,6 +840,8 @@
                 </div>
             </div> -->
 
+            <div style="height: 24px;"></div>
+
             <div class="two-col">
                 <div class="context-box info">
                     <h3>📌 Current Hazards and Threats</h3>
@@ -895,34 +863,7 @@
         <div id="displacement" class="tab-content">
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📍 Displacement Status</h2>
 
-            <div class="grid-2">
-                <div class="card">
-                    <div class="status-label" data-country-field="displacementPrimaryLabel">Iran (Internal Displacement)
-                    </div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;"
-                        data-country-field="displacementPrimaryValue">~100,000</div>
-                    <p style="font-size: 13px; color: #6b7280;" data-country-field="displacementPrimaryDesc">IDPs from
-                        urban centers seeking rural safety</p>
-                </div>
-
-                <div class="card">
-                    <div class="status-label">Lebanon</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;">~30,000+</div>
-                    <p style="font-size: 13px; color: #6b7280;">Registered in shelters; many in transit</p>
-                </div>
-
-                <div class="card">
-                    <div class="status-label">Regional Total</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #dc2626; margin: 10px 0;">~330,000</div>
-                    <p style="font-size: 13px; color: #6b7280;">Across 16 affected countries</p>
-                </div>
-
-                <div class="card">
-                    <div class="status-label">Fluidity</div>
-                    <div style="font-size: 28px; font-weight: bold; color: #f97316; margin: 10px 0;">HIGH</div>
-                    <p style="font-size: 13px; color: #6b7280;">Ongoing displacements; movements increasing</p>
-                </div>
-            </div>
+            <div class="grid-2" id="displacement-kpis-grid"></div>
 
             <div class="two-col">
                 <div class="context-box info">
@@ -1166,7 +1107,7 @@
     </div>
 
     <div class="footer">
-        <p><strong>Data Sources:</strong> UN OCHA, UNHCR, WHO, Amnesty International, ReliefWeb</p>
+        <!-- <p><strong>Data Sources:</strong> UN OCHA, UNHCR, WHO, Amnesty International, ReliefWeb</p> -->
         <p><strong>Analysis Framework:</strong> NRC Situation Analysis Framework (SAF)</p>
     </div>
 
@@ -1293,11 +1234,13 @@
         buildKeyNumbers();
         buildPrecrisisVulnerabilities();
         buildCurrentHazardsAndThreats();
+        buildOverviewKPIs();
+        buildDisplacementKPIs();
         buildDisplacementData();
         buildPriorityInterventions();
         buildSectoralNeeds();
 
-        switchCountry('iran');
+        switchCountry('lebanon');
 
         function buildKeyNumbers() {
             const container = document.getElementById('key-numbers-container');
@@ -1389,18 +1332,74 @@
             container.innerHTML = `<div class="sector-cards-grid">${buildSectorCards(data)}</div>`;
         }
 
-        function buildDisplacementData() {
+        function fmtMetric(n) {
+            if (n === null || n === undefined) return '—';
+            if (n >= 1000000) {
+                const v = n / 1000000;
+                return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(2).replace(/\.?0+$/, '')) + 'M';
+            }
+            if (n >= 1000) return n.toLocaleString();
+            return String(n);
+        }
+
+        function buildOverviewKPIs() {
+            const grid = document.getElementById('overview-kpis-grid');
+            if (!grid) return;
+            const data = window.FINAL_NUMBERS_DATA;
+            if (!data || data.length === 0) return;
+
+            const colorMap = { killed: '#dc2626', injured: '#f97316', displaced: '#2563eb' };
+            const labelMap = { killed: 'People Killed', injured: 'People Injured', displaced: 'People Displaced' };
+
+            grid.innerHTML = data.map(item => {
+                const key   = item.what_happened;
+                const color = colorMap[key] || '#374151';
+                const label = labelMap[key] || item.what_happened.charAt(0).toUpperCase() + item.what_happened.slice(1);
+                return `
+                    <div class="metric-card">
+                        <div class="metric-label">${label}</div>
+                        <div class="metric-value" style="color:${color};">${fmtMetric(item.number)}</div>
+                        <div class="metric-change" style="color:${color};">${item.unit}</div>
+                        <div class="progress-bar"><div class="progress-fill" style="background:${color};"></div></div>
+                    </div>`;
+            }).join('');
+        }
+
+        function buildDisplacementKPIs() {
+            const grid = document.getElementById('displacement-kpis-grid');
+            if (!grid) return;
             const data = window.DISPLACEMENT_DATA;
+            if (!data || !Array.isArray(data) || data.length === 0) return;
+
+            const unitLabelMap = { people: 'Total Displaced', children: 'Displaced Children' };
+
+            grid.innerHTML = data.map(item => {
+                const label = unitLabelMap[item.unit] || item.unit;
+                return `
+                    <div class="card">
+                        <div class="status-label">${label}</div>
+                        <div style="font-size:28px;font-weight:bold;color:#dc2626;margin:10px 0;">${fmtMetric(item.number)}</div>
+                        <p style="font-size:13px;color:#6b7280;">${item.unit}</p>
+                    </div>`;
+            }).join('');
+        }
+
+        function buildDisplacementData() {
+            const data = window.DISPLACEMENT_RISKS_DATA;
             if (!data) return;
 
             const pushList = document.getElementById('displacement-push-factors-list');
             if (pushList && data['Push Factors'] && data['Push Factors'].length > 0) {
                 pushList.innerHTML = data['Push Factors'].map(v => `<li>• ${v}</li>`).join('');
+            } else if (pushList) {
+                pushList.innerHTML = '<li style="color:#9ca3af;">No data available.</li>';
             }
 
             const intentionsList = document.getElementById('displacement-intentions-list');
             if (intentionsList && data['Intentions'] && data['Intentions'].length > 0) {
                 intentionsList.innerHTML = data['Intentions'].map(v => `<li>• ${v}</li>`).join('');
+            } else if (intentionsList) {
+                intentionsList.innerHTML = '<li style="color:#9ca3af;">No data available.</li>';
             }
         }
 
