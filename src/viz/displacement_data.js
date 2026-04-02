@@ -1,6 +1,6 @@
 window.DISPLACEMENT_DATA = [
   {
-    "number": 1170000,
+    "number": 1000000,
     "unit": "people"
   },
   {

@@ -1,15 +1,3 @@
-context_questions = {
-    "Demographics": "How many people live in the area? What are their demographic characteristics (population pyramid)? What was the impact of previous displacements on demography? How many people currently live in the geographical area? ",
-    "Political": "Who are the governing authorities (both formal and unformal), what are the governance modalities? Is the political system democratically elected and representative? What are the main opposition parties? Is there political freedom? How peaceful have been past elections? Who are the main gatekeepers? ",
-    "Economy": "What is the economy mostly based on? What are the main products imported and exported? Have there been recent significant volatilities in the market (e.g. significant rises in cost of food basket, drop in main exports (e.g. garment industry due to COVID)) ",
-    "Socio culture": "What is the social composition of the population (ethnicity, languages, minorities, etc.). What is the role of men and women in the society? What is the role of young and elders in the society? Are there specific cultural attitudes and practice that have implications for programming (prevalence of early marriage, child labour, attitude to education etc.)? ",
-    "Security": "What is the security context (banditry, criminality, robbery, injuries, fatalities)? Who enforces security? What risks exists for nationals and international staff? How is the security infrastructure of the country (centralized, fragmented)? Are there any sanctioned groups operating in areas? ",
-    "Legal and policy": "what are the regulatory systems in place (customary, informal, community based, religious, etc.)? Is there equal access? Are they functioning (efficiency, timeliness, reliability, impartiality), how is law enforced? Are there specific groups that have limited rights/access to the support of law? Are there any local CT measures criminalizing humanitarian aid ?  ",
-    "Infrastructure & technology": "What is the state of public and private infrastructures? What internet and mobile phone coverage is available in affected areas? How easy/difficult is electronic money transfer? ",
-    "Environment": "What are the climate conditions (temperature, precipitations, wind)? is air/Soil polluted? What environmental laws are in place? Will specific seasonal factors have a significant impact and when? (e.g. rainy season, lean season). ",
-    "Humanitarian Coordination": "Is the Cluster system activated?  Who is leading IDPs/refugees coordinating mechanisms? What are lines of leadership, coordination, and accountability for IDPs/Refugees? What government disaster management/refugee agencies exist? What role and relationship does your organisation have with these structures and bodies? ",
-}
-
 displacement_questions = {
     # "Type-Numbers-Movements": (
     #     "How many people are displaced (IDPs, refugees, returnees, stateless)? "
@@ -145,13 +133,9 @@ sectors = [
 ]
 
 pillars_1d = {
-    "Context": context_questions,
     "Displacement": displacement_questions,
     "Shock-Event": shock_event_questions,
     "Humanitarian Access": humanitarian_access_questions,
-}
-web_based_questions = {
-    "Context": context_questions,
 }
 
 situation_analysis_1d = {
@@ -167,10 +151,3 @@ situation_analysis_2d = {
     # "Priority Needs": priority_needs_questions,
     "At Risk": at_risk_questions,
 }
-
-needs_and_response_questions = {
-    "Needs": ...,
-    "Risks": ...,
-    "Forecasting": ...,
-}
-

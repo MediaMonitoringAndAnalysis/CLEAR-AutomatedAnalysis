@@ -3,10 +3,8 @@ import json
 import os
 from llm_multiprocessing_inference import get_answers
 from src.analysis.analytical_questions import (
-    web_based_questions,
     situation_analysis_1d,
     situation_analysis_2d,
-    needs_and_response_questions,
 )
 from src.analysis.analytical_questions import sectors
 import dotenv

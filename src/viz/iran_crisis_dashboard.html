@@ -16,12 +16,13 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             background-color: #f3f4f6;
             color: #1f2937;
+            padding-bottom: 44px;
         }
 
         .header {
             background: white;
             border-bottom: 1px solid #d1d5db;
-            padding: 30px 20px;
+            padding: 12px 20px 0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
@@ -33,33 +34,39 @@
             margin: 0 auto;
         }
 
+        .header-top-row {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
         .header-title {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 5px;
         }
 
         .header-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: #6b7280;
-            margin-bottom: 20px;
         }
 
         .header-time {
-            font-size: 12px;
+            font-size: 11px;
             color: #9ca3af;
+            margin-top: 2px;
         }
 
         .country-switcher {
-            margin-top: 16px;
+            margin-top: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .country-switcher-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #6b7280;
             font-weight: 600;
             text-transform: uppercase;
@@ -68,20 +75,20 @@
 
         .country-options {
             display: inline-flex;
-            padding: 4px;
+            padding: 3px;
             border: 1px solid #d1d5db;
             border-radius: 999px;
             background: #f9fafb;
-            gap: 4px;
+            gap: 3px;
         }
 
         .country-button {
             border: none;
             background: transparent;
             color: #4b5563;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            padding: 8px 14px;
+            padding: 5px 11px;
             border-radius: 999px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -99,20 +106,20 @@
 
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 6px;
+            margin-top: 10px;
             border-top: 1px solid #e5e7eb;
-            padding-top: 15px;
+            padding-top: 0;
             flex-wrap: wrap;
         }
 
         .tab-button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: none;
             border: none;
             border-bottom: 2px solid transparent;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #6b7280;
             transition: all 0.3s;
@@ -589,11 +596,23 @@
         .footer {
             background: #f9fafb;
             border-top: 1px solid #d1d5db;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
+            padding: 8px 24px;
             font-size: 12px;
             color: #6b7280;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            box-shadow: 0 -1px 4px rgba(0,0,0,0.06);
+        }
+
+        .footer p {
+            margin: 0;
         }
 
         .grid-2 {
@@ -615,7 +634,7 @@
             }
 
             .header-title {
-                font-size: 24px;
+                font-size: 18px;
             }
 
             .tabs {
@@ -755,6 +774,74 @@
         .sector-color-access       { background: #be123c; }
         .sector-color-shock        { background: #374151; }
         .sector-color-default      { background: #4b5563; }
+
+        .print-btn {
+            margin-left: auto;
+            padding: 5px 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            align-self: center;
+            transition: background 0.2s;
+        }
+        .print-btn:hover { background: #1d4ed8; }
+
+        .print-section-header { display: none; }
+
+        @media print {
+            body { background: white !important; padding-bottom: 0 !important; }
+
+            .header { position: static !important; box-shadow: none !important; }
+            .tabs, .country-switcher, .print-btn { display: none !important; }
+            .footer { display: none !important; }
+            .container { margin-top: 16px !important; }
+
+            /* Show only the three exported tabs */
+            .tab-content { display: none !important; }
+            .tab-content.print-visible { display: block !important; }
+            .tab-content.print-visible ~ .tab-content.print-visible { page-break-before: always; }
+
+            /* Per-section heading */
+            .print-section-header {
+                display: block;
+                font-size: 16pt;
+                font-weight: bold;
+                margin-bottom: 16px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid #2563eb;
+                color: #1f2937;
+            }
+
+            /* Avoid breaking inside cards */
+            .metric-card, .card, .scenario-card,
+            .sector-intervention-card, .key-number-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Expand tooltip risk details inline */
+            .tooltip-wrapper { position: static !important; display: inline-block !important; }
+            .tooltip-content {
+                display: block !important;
+                position: static !important;
+                background: #f3f4f6 !important;
+                color: #1f2937 !important;
+                width: auto !important;
+                box-shadow: none !important;
+                padding: 4px 6px !important;
+                margin-top: 4px !important;
+                font-size: 7.5pt !important;
+                line-height: 1.4 !important;
+                border-radius: 4px !important;
+                text-align: left !important;
+            }
+            .tooltip-content::after { display: none !important; }
+            .tooltip-title { color: #6b7280 !important; }
+        }
     </style>
     <!-- SECTORS_DATA_START -->
     <script src="shown_risks_data.js"></script>
@@ -787,14 +874,18 @@
     <!-- TOP_5_SOURCES_DATA_START -->
     <script src="top_5_sources_data.js"></script>
     <!-- TOP_5_SOURCES_DATA_END -->
+    <!-- OUTPUT_CONTEXT_RISKS_DATA_START -->
+    <script src="output_context_risks_data.js"></script>
+    <!-- OUTPUT_CONTEXT_RISKS_DATA_END -->
 </head>
 
 <body>
     <div class="header">
         <div class="header-content">
-            <div class="header-title" data-country-field="headerTitle">Lebanon Crisis 2026</div>
-            <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time
-                Data</div>
+            <div class="header-top-row">
+                <div class="header-title" data-country-field="headerTitle">Lebanon Crisis 2026</div>
+                <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time Data</div>
+            </div>
             <div class="header-time">Last Data Update: March 21, 2026</div>
 
             <div class="country-switcher">
@@ -807,10 +898,11 @@
 
             <div class="tabs">
                 <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
-                <button class="tab-button" onclick="switchTab('displacement')">📍 Displacement</button>
+                <!-- <button class="tab-button" onclick="switchTab('displacement')">📍 Displacement</button> -->
                 <button class="tab-button" onclick="switchTab('sectors')">🏢 Sectors</button>
                 <!-- <button class="tab-button" onclick="switchTab('response')">🆘 Response Gap</button> -->
                 <button class="tab-button" onclick="switchTab('scenarios')">🔮 Response Planning</button>
+                <button class="print-btn" onclick="printDashboard()">⬇ Export PDF</button>
             </div>
         </div>
     </div>
@@ -818,9 +910,16 @@
     <div class="container">
         <!-- OVERVIEW TAB -->
         <div id="overview" class="tab-content active">
+            <div class="print-section-header">📊 Overview</div>
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📊 Crisis Snapshot</h2>
 
             <div class="grid-4" id="overview-kpis-grid"></div>
+
+            <div style="height: 24px;"></div>
+            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📍 Context Risks</h2>
+            <div class="context-box" id="context-risks-card" style="border-left-color: #dc2626; background: #fee2e2; display:none;">
+                <ul id="context-risks-list"></ul>
+            </div>
 
             <!-- <div class="card">
                 <h2>Crisis Status ⚠️</h2>
@@ -845,6 +944,8 @@
 
             <div style="height: 24px;"></div>
 
+            <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📍 Hazards and Threats</h2>
+
             <div class="two-col">
                 <div class="context-box info">
                     <h3>📌 Current Hazards and Threats</h3>
@@ -860,13 +961,10 @@
                     </ul>
                 </div>
             </div>
-        </div>
 
-        <!-- DISPLACEMENT TAB -->
-        <div id="displacement" class="tab-content">
+
+            <!-- <div class="grid-2" id="displacement-kpis-grid"></div> -->
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">📍 Displacement Status</h2>
-
-            <div class="grid-2" id="displacement-kpis-grid"></div>
 
             <div class="two-col">
                 <div class="context-box info">
@@ -885,8 +983,10 @@
             </div>
         </div>
 
+
         <!-- SECTORS TAB -->
         <div id="sectors" class="tab-content">
+            <div class="print-section-header">🏢 Sector Analysis</div>
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🏢 Sector-wise Analysis
             </h2>
 
@@ -975,7 +1075,7 @@
 
         <!-- SCENARIOS TAB -->
         <div id="scenarios" class="tab-content">
-
+            <div class="print-section-header">🔮 Response Planning</div>
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🚧 Current Critical Access Issues</h2>
             <div class="context-box" style="border-left-color: #dc2626; background: #fee2e2;">
                 <!-- <h3></h3> -->
@@ -1094,10 +1194,10 @@
         </div>
     </div>
 
-    <div class="footer">
+    <footer class="footer">
         <p><strong>Top Data Sources:</strong> <span id="top-sources-list">—</span></p>
         <p><strong>Analysis Framework:</strong> NRC Situation Analysis Framework (SAF)</p>
-    </div>
+    </footer>
 
     <script>
         const countryProfiles = {
@@ -1223,6 +1323,7 @@
         buildPrecrisisVulnerabilities();
         buildCurrentHazardsAndThreats();
         buildOverviewKPIs();
+        buildContextRisks();
         buildDisplacementKPIs();
         buildTopSources();
         buildDisplacementData();
@@ -1343,15 +1444,31 @@
             grid.innerHTML = data.map(item => {
                 const key   = item.what_happened;
                 const color = colorMap[key] || '#374151';
-                const label = labelMap[key] || item.what_happened.charAt(0).toUpperCase() + item.what_happened.slice(1);
+                const label = labelMap[key] || (key ? key.charAt(0).toUpperCase() + key.slice(1) : item.unit);
                 return `
                     <div class="metric-card">
                         <div class="metric-label">${label}</div>
                         <div class="metric-value" style="color:${color};">${fmtMetric(item.number)}</div>
                         <div class="metric-change" style="color:${color};">${item.unit}</div>
-                        <div class="progress-bar"><div class="progress-fill" style="background:${color};"></div></div>
                     </div>`;
             }).join('');
+        }
+
+        function buildContextRisks() {
+            const data = window.OUTPUT_CONTEXT_RISKS_DATA;
+            const card = document.getElementById('context-risks-card');
+            const list = document.getElementById('context-risks-list');
+            if (!data || !card || !list) return;
+
+            const entries = Object.entries(data).filter(([, vals]) => vals && vals.length > 0);
+            if (entries.length === 0) return;
+
+            list.innerHTML = entries.map(([key, values]) =>
+                `<li style="font-size:13px; color:#374151; line-height:1.5;">
+                    <strong>${key}:</strong> ${values.join(', ')}
+                </li>`
+            ).join('');
+            card.style.display = 'block';
         }
 
         function buildDisplacementKPIs() {
@@ -1426,6 +1543,25 @@
             list.innerHTML = data.map(v => `<li>• ${v}</li>`).join('');
         }
         
+
+        // ── PDF Export ──────────────────────────────────────────────
+        const PRINT_TABS = ['overview', 'sectors', 'scenarios'];
+
+        window.addEventListener('beforeprint', function () {
+            PRINT_TABS.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('print-visible');
+            });
+        });
+
+        window.addEventListener('afterprint', function () {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('print-visible'));
+        });
+
+        function printDashboard() {
+            window.print();
+        }
+        // ────────────────────────────────────────────────────────────
 
         function buildAccessBarriers() {
             const list = document.getElementById('access-barriers-list');

@@ -3,6 +3,7 @@ import pandas as pd
 from data_connectors import get_reliefweb_leads
 from src.analysis.documents_based_analysis import _perform_documents_based_analysis
 from src.analysis.numbers_extraction import performs_numbers_extraction
+from src.analysis.context_generation import generate_context
 import argparse
 import dotenv
 import os
@@ -175,3 +176,5 @@ if __name__ == "__main__":
             one_country_classification_df,
             numbers_extraction_df_path,
         )
+
+        generate_context(country, os.path.join(save_folder, country, "context_figures.json"))

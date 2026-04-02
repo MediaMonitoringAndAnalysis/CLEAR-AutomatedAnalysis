@@ -33,3 +33,8 @@
 
 ### Report downloadable in word format
 
+later
+- recommended actions
+- forecasting of numbers
+- scenarios
+- crisis status
