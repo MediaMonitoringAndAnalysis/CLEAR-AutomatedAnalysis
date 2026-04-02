@@ -27,7 +27,7 @@ window.KEY_NUMBERS_DATA = {
     },
     {
       "key_indicator": "Displaced individuals registered",
-      "number": 1000000.0,
+      "number": 1170000.0,
       "unit": "people"
     },
     {

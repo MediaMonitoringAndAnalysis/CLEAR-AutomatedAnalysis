@@ -784,6 +784,9 @@
     <!-- SECTORAL_NEEDS_DATA_START -->
     <script src="top_sectoral_needs_data.js"></script>
     <!-- SECTORAL_NEEDS_DATA_END -->
+    <!-- TOP_5_SOURCES_DATA_START -->
+    <script src="top_5_sources_data.js"></script>
+    <!-- TOP_5_SOURCES_DATA_END -->
 </head>
 
 <body>
@@ -792,7 +795,7 @@
             <div class="header-title" data-country-field="headerTitle">Lebanon Crisis 2026</div>
             <div class="header-subtitle" data-country-field="headerSubtitle">Situation Analysis Dashboard • Real-time
                 Data</div>
-            <div class="header-time">Last Updated: March 9, 2026 • 14:30 UTC</div>
+            <div class="header-time">Last Data Update: March 21, 2026</div>
 
             <div class="country-switcher">
                 <span class="country-switcher-label">Country Focus</span>
@@ -927,21 +930,6 @@
         <!-- RESPONSE TAB -->
         <div id="response" class="tab-content">
             <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">🆘 Response Capacity & Access</h2>
-
-            <!-- <div class="two-col" style="grid-template-columns: 1fr; width: 100%;"> -->
-            
-
-                <!-- <div class="context-box" style="border-left-color: #16a34a; background: #f0fdf4;">
-                    <h3>✓ Response Actors & Capacity</h3>
-                    <ul>
-                        <li><strong>UNHCR:</strong> Largest UN agency; mobilizing</li>
-                        <li><strong>WHO:</strong> Coordinating health response</li>
-                        <li><strong>Relief International:</strong> Operating in 9 countries</li>
-                        <li><strong>IFRC/Red Crescent:</strong> Local capacity present</li>
-                        <li><strong>Gap:</strong> Limited NGO presence</li>
-                    </ul>
-                </div> -->
-            <!-- </div> -->
 
             <div class="card">
                 <h3>Priority Needs (Next 2-4 weeks)</h3>
@@ -1107,7 +1095,7 @@
     </div>
 
     <div class="footer">
-        <!-- <p><strong>Data Sources:</strong> UN OCHA, UNHCR, WHO, Amnesty International, ReliefWeb</p> -->
+        <p><strong>Top Data Sources:</strong> <span id="top-sources-list">—</span></p>
         <p><strong>Analysis Framework:</strong> NRC Situation Analysis Framework (SAF)</p>
     </div>
 
@@ -1236,6 +1224,7 @@
         buildCurrentHazardsAndThreats();
         buildOverviewKPIs();
         buildDisplacementKPIs();
+        buildTopSources();
         buildDisplacementData();
         buildPriorityInterventions();
         buildSectoralNeeds();
@@ -1336,7 +1325,7 @@
             if (n === null || n === undefined) return '—';
             if (n >= 1000000) {
                 const v = n / 1000000;
-                return (v % 1 === 0 ? v.toFixed(0) : v.toFixed(2).replace(/\.?0+$/, '')) + 'M';
+                return v.toFixed(2) + 'M';
             }
             if (n >= 1000) return n.toLocaleString();
             return String(n);
@@ -1401,6 +1390,14 @@
             } else if (intentionsList) {
                 intentionsList.innerHTML = '<li style="color:#9ca3af;">No data available.</li>';
             }
+        }
+
+        function buildTopSources() {
+            const el = document.getElementById('top-sources-list');
+            if (!el) return;
+            const data = window.TOP_5_SOURCES_DATA;
+            if (!data || data.length === 0) return;
+            el.textContent = data.join(', ');
         }
 
         function buildCurrentHazardsAndThreats() {
